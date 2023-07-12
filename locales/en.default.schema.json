@@ -343,6 +343,14 @@
         }
       }
     },
+    "coupon":{
+      "name": "Coupon Area",
+      "setting":{
+        "label": "Cart1 type",
+        "drawer": {
+          "label": "Drawer"
+        }
+    },
     "layout": {
       "name": "Layout",
       "settings": {
