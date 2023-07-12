@@ -34,7 +34,7 @@
     ]
   },
   {
-    "name": "Coupon",
+    "name": "Promo Code",
     "settings": [
       {
         "type": "checkbox",
@@ -45,12 +45,7 @@
       {
         "type": "text",
         "id": "custom_text",
-        "label": "XDDD"
-      },
-      {
-        "type": "image_picker",
-        "id": "myimage",
-        "label": "Hello"
+        "label": "Promo Code"
       }
     ]
   },
