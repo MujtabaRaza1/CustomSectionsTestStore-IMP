@@ -313,6 +313,15 @@
         }
       }
     },
+    "coupon": {
+      "name": "Coupon Area",
+      "setting": {
+        "label": "Cart1 type",
+        "drawer": {
+          "label": "Drawer"
+        }
+      }
+    },
     "cart": {
       "name": "Cart",
       "settings": {
@@ -340,15 +349,6 @@
             "label": "Collection",
             "info": "Visible when cart drawer is empty."
           }
-        }
-      }
-    },
-    "coupon": {
-      "name": "Coupon Area",
-      "setting": {
-        "label": "Cart1 type",
-        "drawer": {
-          "label": "Drawer"
         }
       }
     },
