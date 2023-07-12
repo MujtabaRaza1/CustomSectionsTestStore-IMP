@@ -138,6 +138,16 @@
         }
       }
     },
+    "coupon": {
+      "name": "coupon",
+      "settings": {
+        "content": "Currency codes",
+        "paragraph": "lun maru BC",
+        "currency_code_enabled": {
+          "label": "Show currency codes"
+        }
+      }
+    },
     "logo": {
       "name": "Logo",
       "settings": {
@@ -308,16 +318,6 @@
       "settings": {
         "content": "Currency codes",
         "paragraph": "Cart and checkout prices always show currency codes. Example: $1.00 USD.",
-        "currency_code_enabled": {
-          "label": "Show currency codes"
-        }
-      }
-    },
-    "coupon": {
-      "name": "coupon",
-      "settings": {
-        "content": "Currency codes",
-        "paragraph": "lun maru BC",
         "currency_code_enabled": {
           "label": "Show currency codes"
         }
