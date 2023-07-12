@@ -1,1 +1,43 @@
-{"sections":{"cart-items":{"type":"main-cart-items","settings":{"padding_top":36,"padding_bottom":36}},"cart-footer":{"type":"main-cart-footer","blocks":{"subtotal":{"type":"subtotal","settings":{}},"buttons":{"type":"buttons","settings":{}}},"block_order":["subtotal","buttons"],"settings":{}}},"order":["cart-items","cart-footer"]}
+{
+  "sections": {
+    "cart-items": {
+      "type": "main-cart-items",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "cart-footer": {
+      "type": "main-cart-footer",
+      "blocks": {
+        "subtotal": {
+          "type": "subtotal",
+          "settings": {
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+          }
+        },
+        "6e1c92fe-0c69-47d2-ac11-b2292eb9d54e": {
+          "type": "discount_code",
+          "settings": {
+            "discount_code": "XDD"
+          }
+        }
+      },
+      "block_order": [
+        "subtotal",
+        "buttons",
+        "6e1c92fe-0c69-47d2-ac11-b2292eb9d54e"
+      ],
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "cart-items",
+    "cart-footer"
+  ]
+}
