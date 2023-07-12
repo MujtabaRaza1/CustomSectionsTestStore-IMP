@@ -314,12 +314,12 @@
       }
     },
     "coupon": {
-      "name": "Coupon",
-      "setting": {
-        "label": "Cart1 type",
+      "name": "coupon",
+      "settings": {
+        "content": "Currency codes",
         "paragraph": "lun maru BC",
-        "drawer": {
-          "label": "Drawer"
+        "currency_code_enabled": {
+          "label": "Show currency codes"
         }
       }
     },
