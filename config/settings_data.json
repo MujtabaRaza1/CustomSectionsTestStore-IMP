@@ -1,8 +1,9 @@
 {
   "current": {
     "logo_width": 90,
-    "view_text": true,
-    "custom_text": "render10",
+    "custom_text_1": "render10",
+    "product_1": "black-leather-bag",
+    "custom_text_2": "render20",
     "type_header_font": "assistant_n4",
     "heading_scale": 100,
     "type_body_font": "assistant_n4",
@@ -116,6 +117,8 @@
     "show_vendor": false,
     "show_cart_note": false,
     "cart_drawer_collection": "",
+    "view_text": true,
+    "custom_text": "render10",
     "myimage": "shopify:\/\/shop_images\/Logo_8c5e557f-7f48-44f0-a755-0822769872fd.png",
     "sections": {
       "main-password-header": {
