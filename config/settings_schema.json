@@ -34,27 +34,22 @@
     ]
   },
   {
-    "name": "Promo Code 1",
+    "name": "Promo Code",
     "settings": [
       {
         "type": "text",
         "id": "custom_text_1",
-        "label": "Promo Code"
+        "label": "Enter Promo Code"
       },
       {
         "id": "product_1",
         "label": "Free Sample Collection",
         "type": "product"
-      }
-    ]
-  },
-  {
-    "name": "Promo Code",
-    "settings": [
+      },
       {
         "type": "text",
         "id": "custom_text_2",
-        "label": "Promo Code"
+        "label": "Enter Promo Code"
       },
       {
         "id": "product_2",
@@ -64,7 +59,7 @@
       {
         "type": "text",
         "id": "custom_text_3",
-        "label": " enter Promo Code"
+        "label": "Enter Promo Code"
       },
       {
         "id": "product_3",
