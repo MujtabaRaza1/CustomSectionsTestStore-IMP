@@ -317,6 +317,7 @@
       "name": "Coupon",
       "setting": {
         "label": "Cart1 type",
+        "paragraph": "lun maru BC",
         "drawer": {
           "label": "Drawer"
         }
