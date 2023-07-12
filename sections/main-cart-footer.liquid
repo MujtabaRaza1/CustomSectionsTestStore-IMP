@@ -8,16 +8,18 @@
     <div class="drawer__discount-code">
       <label for="CartDrawer-DiscountCode" class="label1">Discount Code</label>
       <div class="input-group">
-        <form action="/cart" method="post">
-        <input
-          type="text"
-          id="CartDrawer-DiscountCode"
-          name="discount_code"
-          class="input-group__field"
-          placeholder="Enter discount code"
-        >
-        <button type="submit" class="button input-group__btn" id="apply-discount-button">Apply</button>
-      </form>
+        {% assign discountCode = settings.discount_code %}
+          <form action="/cart" method="post">
+            <input
+              type="text"
+              id="CartDrawer-DiscountCode"
+              name="discount_code"
+              class="input-group__field"
+              placeholder="Enter discount code"
+              value="{{ discountCode }}"
+            >
+            <button type="submit" class="button input-group__btn" id="apply-discount-button">Apply</button>
+          </form>
 
       <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -206,7 +208,17 @@
       "limit": 1
     },
     {
-      "type": "@app"
+      "type": "discount_code",
+      "name": "Discount Code",
+      "settings": [
+        {
+          "type": "text",
+          "label": "Discount Code",
+          "id": "discount_code",
+          "default": "YOUR_DEFAULT_VALUE_HERE",
+          "info": "Enter the discount code to be applied at checkout."
+        }
+      ]
     }
   ]
 }
