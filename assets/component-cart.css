@@ -152,6 +152,24 @@ cart-items {
     margin-left: 4rem;
     margin-top: 0;
   }
+  .drawer__discount-code{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .input-group__field{
+    font-family: var(--x-text-field-font-family);
+    font-size: var(--field-font-size);
+    font-weight: var(--x-text-field-font-weight);
+    letter-spacing: var(--x-text-field-letter-spacing,inherit);
+    line-height: var(--field-line-height);
+    text-transform: var(--x-text-field-text-transform,var(--x-global-typography-letter-case));
+    outline: none;
+  }
+  .label1{
+    margin-right: 19rem;
+  }
 }
 
 .cart__ctas button {

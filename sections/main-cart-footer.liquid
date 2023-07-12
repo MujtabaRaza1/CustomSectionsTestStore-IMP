@@ -5,6 +5,19 @@
 
 <div class="page-width{% if cart == empty %} is-empty{% endif %}" id="main-cart-footer" data-id="{{ section.id }}">
   <div>
+    <div class="drawer__discount-code">
+      <label for="CartDrawer-DiscountCode" class="label1">Discount Code</label>
+      <div class="input-group">
+        <input
+          type="text"
+          id="CartDrawer-DiscountCode"
+          name="discount"
+          class="input-group__field"
+          placeholder="Enter discount code"
+        >
+        <button type="submit" class="button input-group__btn" id="apply-discount-button">Apply</button>
+      </div>
+    </div>
     <div class="cart__footer">
       {%- if settings.show_cart_note -%}
         <cart-note class="cart__note field">
@@ -18,7 +31,7 @@
           >{{ cart.note }}</textarea>
         </cart-note>
       {%- endif -%}
-
+      
       <div class="cart__blocks">
         {% for block in section.blocks %}
           {%- case block.type -%}
@@ -111,7 +124,53 @@
     document.querySelector('#checkout').addEventListener('click', function (event) {
       document.querySelector('#cart').submit();
     });
+
+    
   });
+  
+</script>
+<script>
+    let gifts_list = [];
+    function getGiftSettings() {
+      {% for i in (0..20) %}
+        {% if forloop.first %}
+          {% assign variant_id = 'free_gift_variant_id' %}
+          {% if settings[variant_id] %}
+            {% assign slug_ = settings[variant_id] %}
+            {% assign product_id_ = all_products[slug_].selected_or_first_available_variant.id %}
+            {% assign free_gift_codes_ = 'free_gift_codes' %}
+            {% assign free_gift_threshold_amount_ = 'free_gift_threshold_amount' %}
+
+            let free_g_1 = {
+              product_id: "{{ product_id_ }}",
+              FreeGiftThresholdAmount: {{ settings[free_gift_threshold_amount_] | json }},
+              free_gift_codes: "{{ settings[free_gift_codes_] | default: '' }}"
+            };
+            free_g_1.free_gift_codes = free_g_1.free_gift_codes.toLowerCase();
+            gifts_list.push(free_g_1);
+          {% endif %}
+        {% endif %}
+
+        {% assign variant_id = 'free_gift_variant_id_' | append: i %}
+        {% if settings[variant_id] %}
+          {% assign slug_ = settings[variant_id] %}
+          {% assign product_id_ = all_products[slug_].selected_or_first_available_variant.id %}
+          {% assign free_gift_codes_ = 'free_gift_codes_' | append: i %}
+          {% assign free_gift_threshold_amount_ = 'free_gift_threshold_amount_' | append: i %}
+
+          let free_g_{{ i }} = {
+            product_id: "{{ product_id_ }}",
+            FreeGiftThresholdAmount: {{ settings[free_gift_threshold_amount_] | json }},
+            free_gift_codes: "{{ settings[free_gift_codes_] | default: '' }}"
+          };
+          free_g_{{ i }}.free_gift_codes = free_g_{{ i }}.free_gift_codes.toLowerCase();
+          gifts_list.push(free_g_{{ i }});
+        {% endif %}
+      {% endfor %}
+     console.log(gifts_list);
+   }
+
+    document.querySelector('#apply-discount-button').addEventListener('click', getGiftSettings);
 </script>
 
 {% schema %}
