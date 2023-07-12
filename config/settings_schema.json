@@ -46,6 +46,11 @@
         "type": "text",
         "id": "custom_text",
         "label": "Promo Code"
+      },
+      {
+        "id": "collection",
+        "label": "Free Sample Collection",
+        "type": "collection"
       }
     ]
   },
