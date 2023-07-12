@@ -161,27 +161,21 @@
 
 {% schema %}
 {
-  "name": "Main Cart Footer",
+  "name": "t:sections.main-cart-footer.name",
   "class": "cart__footer-wrapper",
   "blocks": [
     {
       "type": "subtotal",
-      "name": "Subtotal",
+      "name": "t:sections.main-cart-footer.blocks.subtotal.name",
       "limit": 1
     },
     {
       "type": "buttons",
-      "name": "Buttons",
+      "name": "t:sections.main-cart-footer.blocks.buttons.name",
       "limit": 1
-    }
-  ],
-  "settings": [
+    },
     {
-      "type": "text",
-      "label": "Discount Code",
-      "id": "discount_code",
-      "default": "YOUR_DEFAULT_VALUE_HERE",
-      "info": "Enter the discount code to be applied at checkout." 
+      "type": "@app"
     }
   ]
 }
