@@ -4,20 +4,19 @@
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 
 <div class="page-width{% if cart == empty %} is-empty{% endif %}" id="main-cart-footer" data-id="{{ section.id }}">
-  <div>
-    <div class="drawer__discount-code">
+  <div class="drawer__discount-code section">
       <label for="CartDrawer-DiscountCode" class="label1">Discount Code</label>
       <div class="input-group">
-        <form action="/cart" method="post">
-        <input
-          type="text"
-          id="CartDrawer-DiscountCode"
-          name="discount_code"
-          class="input-group__field"
-          placeholder="Enter discount code"
-        >
-        <button type="submit" class="button input-group__btn" id="apply-discount-button">Apply</button>
-      </form>
+        {% assign discountCode = settings.discount_code %}
+            <input
+              type="text"
+              id="CartDrawer-DiscountCode"
+              name="discount_code"
+              class="input-group__field"
+              placeholder="Enter discount code"
+              value="{{ discountCode }}"
+            >
+            <button type="submit" class="button input-group__btn" id="apply-discount-button">Apply</button>
 
       <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -46,6 +45,7 @@
       </script>
       </div>
     </div>
+  <div>
     <div class="cart__footer">
       {%- if settings.show_cart_note -%}
         <cart-note class="cart__note field">
@@ -157,38 +157,7 @@
   });
   
 </script>
-{% comment %} <script>
-    let gifts_list = [];
-    function getGiftSettings(response) {
-        // Extract the discount codes from the response
-        const discountCodes = response.price_rules.map(rule => rule.title);
-        
-        // Save the discount codes in the gifts_list array
-        const gifts_list = discountCodes;
-        
-        // Use the discount codes as needed
-        console.log(gifts_list);
-      }
-      
-      // Create a script element dynamically
-      const script = document.createElement('script');
-      
-      // Replace 'YOUR_SHOPIFY_STORE_URL' with your actual store URL
-      const shopifyStoreUrl = 'coop-lowski1';
-      
-      // Endpoint URL to retrieve discount codes with JSONP callback
-      const endpoint = `https://${shopifyStoreUrl}/admin/api/2021-07/price_rules.json?callback=handleDiscountCodes`;
-      
-      // Set the script element's 'src' attribute to the endpoint URL
-      script.src = endpoint;
-      
-      // Append the script element to the document body to trigger the JSONP request
-      document.body.appendChild(script);
-     console.log(gifts_list);
-   
 
-    document.querySelector('#apply-discount-button').addEventListener('click', getGiftSettings);
-</script> {% endcomment %}
 
 {% schema %}
 {
@@ -209,5 +178,6 @@
       "type": "@app"
     }
   ]
+  
 }
 {% endschema %}
