@@ -48,9 +48,9 @@
         "label": "Promo Code"
       },
       {
-        "id": "collection",
+        "id": "product",
         "label": "Free Sample Collection",
-        "type": "collection"
+        "type": "product"
       }
     ]
   },
