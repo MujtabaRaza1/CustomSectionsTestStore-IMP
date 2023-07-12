@@ -8,7 +8,6 @@
       <label for="CartDrawer-DiscountCode" class="label1">Discount Code</label>
       <div class="input-group">
         {% assign discountCode = settings.discount_code %}
-          <form action="/cart" method="post">
             <input
               type="text"
               id="CartDrawer-DiscountCode"
@@ -18,7 +17,6 @@
               value="{{ discountCode }}"
             >
             <button type="submit" class="button input-group__btn" id="apply-discount-button">Apply</button>
-          </form>
 
       <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -159,66 +157,31 @@
   });
   
 </script>
-{% comment %} <script>
-    let gifts_list = [];
-    function getGiftSettings(response) {
-        // Extract the discount codes from the response
-        const discountCodes = response.price_rules.map(rule => rule.title);
-        
-        // Save the discount codes in the gifts_list array
-        const gifts_list = discountCodes;
-        
-        // Use the discount codes as needed
-        console.log(gifts_list);
-      }
-      
-      // Create a script element dynamically
-      const script = document.createElement('script');
-      
-      // Replace 'YOUR_SHOPIFY_STORE_URL' with your actual store URL
-      const shopifyStoreUrl = 'coop-lowski1';
-      
-      // Endpoint URL to retrieve discount codes with JSONP callback
-      const endpoint = `https://${shopifyStoreUrl}/admin/api/2021-07/price_rules.json?callback=handleDiscountCodes`;
-      
-      // Set the script element's 'src' attribute to the endpoint URL
-      script.src = endpoint;
-      
-      // Append the script element to the document body to trigger the JSONP request
-      document.body.appendChild(script);
-     console.log(gifts_list);
-   
 
-    document.querySelector('#apply-discount-button').addEventListener('click', getGiftSettings);
-</script> {% endcomment %}
 
 {% schema %}
 {
-  "name": "t:sections.main-cart-footer.name",
+  "name": "Main Cart Footer",
   "class": "cart__footer-wrapper",
   "blocks": [
     {
       "type": "subtotal",
-      "name": "t:sections.main-cart-footer.blocks.subtotal.name",
+      "name": "Subtotal",
       "limit": 1
     },
     {
       "type": "buttons",
-      "name": "t:sections.main-cart-footer.blocks.buttons.name",
+      "name": "Buttons",
       "limit": 1
-    },
+    }
+  ],
+  "settings": [
     {
-      "type": "discount_code",
-      "name": "Discount Code",
-      "settings": [
-        {
-          "type": "text",
-          "label": "Discount Code",
-          "id": "discount_code",
-          "default": "YOUR_DEFAULT_VALUE_HERE",
-          "info": "Enter the discount code to be applied at checkout."
-        }
-      ]
+      "type": "text",
+      "label": "Discount Code",
+      "id": "discount_code",
+      "default": "YOUR_DEFAULT_VALUE_HERE",
+      "info": "Enter the discount code to be applied at checkout."
     }
   ]
 }
