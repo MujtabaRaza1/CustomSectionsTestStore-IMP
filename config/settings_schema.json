@@ -49,7 +49,7 @@
     ]
   },
   {
-    "name": "Promo Code 2",
+    "name": "Promo Code",
     "settings": [
       {
         "type": "text",
@@ -60,16 +60,11 @@
         "id": "product_2",
         "label": "Free Sample Collection",
         "type": "product"
-      }
-    ]
-  },
-  {
-    "name": "Promo Code 3",
-    "settings": [
+      },
       {
         "type": "text",
         "id": "custom_text_3",
-        "label": "Promo Code"
+        "label": " enter Promo Code"
       },
       {
         "id": "product_3",
