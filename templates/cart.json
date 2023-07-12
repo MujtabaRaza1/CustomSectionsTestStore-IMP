@@ -19,20 +19,14 @@
           "type": "buttons",
           "settings": {
           }
-        },
-        "6e1c92fe-0c69-47d2-ac11-b2292eb9d54e": {
-          "type": "discount_code",
-          "settings": {
-            "discount_code": "XDD"
-          }
         }
       },
       "block_order": [
         "subtotal",
-        "buttons",
-        "6e1c92fe-0c69-47d2-ac11-b2292eb9d54e"
+        "buttons"
       ],
       "settings": {
+        "discount_code": "OK"
       }
     }
   },
