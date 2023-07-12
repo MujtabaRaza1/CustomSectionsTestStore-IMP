@@ -34,21 +34,63 @@
     ]
   },
   {
-    "name": "Promo Code",
+    "name": "Promo Code 1",
     "settings": [
       {
         "type": "checkbox",
-        "id": "view_text",
+        "id": "view_text_1",
         "label": "Enable Text",
         "default": false
       },
       {
         "type": "text",
-        "id": "custom_text",
+        "id": "custom_text_1",
         "label": "Promo Code"
       },
       {
-        "id": "product",
+        "id": "product_1",
+        "label": "Free Sample Collection",
+        "type": "product"
+      }
+    ]
+  },
+  {
+    "name": "Promo Code 2",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "view_text_2",
+        "label": "Enable Text",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "custom_text_2",
+        "label": "Promo Code"
+      },
+      {
+        "id": "product_2",
+        "label": "Free Sample Collection",
+        "type": "product"
+      }
+    ]
+  },
+  {
+    "name": "Promo Code 3",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "view_text_3",
+        "label": "Enable Text",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "custom_text_3",
+        "label": "Promo Code"
+      },
+      {
+        "id": "product_3",
         "label": "Free Sample Collection",
         "type": "product"
       }
