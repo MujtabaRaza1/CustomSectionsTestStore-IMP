@@ -38,7 +38,7 @@
     "settings": [
       {
         "type": "text",
-        "id": "custom_text_1",
+        "id": "promoCode_1",
         "label": "Enter Promo Code"
       },
       {
@@ -48,7 +48,7 @@
       },
       {
         "type": "text",
-        "id": "custom_text_2",
+        "id": "promoCode_2",
         "label": "Enter Promo Code"
       },
       {
@@ -58,7 +58,7 @@
       },
       {
         "type": "text",
-        "id": "custom_text_3",
+        "id": "promoCode_3",
         "label": "Enter Promo Code"
       },
       {
