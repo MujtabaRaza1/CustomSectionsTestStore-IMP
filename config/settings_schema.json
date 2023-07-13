@@ -42,6 +42,11 @@
         "label": "Enter Promo Code"
       },
       {
+        "type": "number",
+        "id": "promoThresholdAmount_1",
+        "label": "Enter Threshold Amount"
+      },
+      {
         "id": "product_1",
         "label": "Free Sample Collection",
         "type": "product"
