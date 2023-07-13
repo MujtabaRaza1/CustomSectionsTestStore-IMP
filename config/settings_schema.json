@@ -34,7 +34,7 @@
     ]
   },
   {
-    "name": "Promo Code",
+    "name": "PromoCode",
     "settings": [
       {
         "type": "text",
