@@ -38,8 +38,13 @@
     "settings": [
       {
         "type": "text",
-        "id": "custom_text_1",
+        "id": "promoCode_1",
         "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_1",
+        "label": "Enter Threshold Amount"
       },
       {
         "id": "product_1",
@@ -48,8 +53,13 @@
       },
       {
         "type": "text",
-        "id": "custom_text_2",
+        "id": "promoCode_2",
         "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_2",
+        "label": "Enter Threshold Amount"
       },
       {
         "id": "product_2",
@@ -58,11 +68,271 @@
       },
       {
         "type": "text",
-        "id": "custom_text_3",
+        "id": "promoCode_3",
         "label": "Enter Promo Code"
       },
       {
+        "type": "number",
+        "id": "promoThresholdAmount_3",
+        "label": "Enter Threshold Amount"
+      },
+      {
         "id": "product_3",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_4",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_4",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_4",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_5",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_5",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_5",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_6",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_6",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_6",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_7",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_7",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_7",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_8",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_8",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_8",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_9",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_9",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_9",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_10",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_10",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_10",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_11",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_11",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_11",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_12",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_12",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_12",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_13",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_13",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_13",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_14",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_14",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_14",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_15",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_15",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_15",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_16",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_16",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_16",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_17",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_17",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_17",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_18",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_18",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_18",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_19",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_19",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_19",
+        "label": "Free Sample Collection",
+        "type": "product"
+      },
+      {
+        "type": "text",
+        "id": "promoCode_20",
+        "label": "Enter Promo Code"
+      },
+      {
+        "type": "number",
+        "id": "promoThresholdAmount_20",
+        "label": "Enter Threshold Amount"
+      },
+      {
+        "id": "product_20",
         "label": "Free Sample Collection",
         "type": "product"
       }
