@@ -16,30 +16,39 @@
               placeholder="Enter discount code"
               value="{{ discountCode }}"
             >
+
+             
+              <script>
+
+
+
+              </script>
+              {{ settings.settings['promoCode_1'] }}
               
             <button type="submit" class="button input-group__btn" id="apply-discount-button">Apply</button>
             
-            <script>
-              const totalCartPrice = ({{ cart.total_price }} / 100);
-              console.log(totalCartPrice);
-              if(totalCartPrice < 300){
-                console.log('not eligable for free product');
-               
-              }
-              let arr12 = [{{ settings["defination"] }}];
-              console.log(arr12);
-              
-              
-              {% comment %} let promoCodeRegex = /"name"\s*:\s*"Promo Code"[^}]+}/;
-              let promoCodeMatch = settings.match(promoCodeRegex);
-
-              if (promoCodeMatch) {
-                let promoCode = JSON.parse(promoCodeMatch[0]);
-                console.log(promoCode);
-              } else {
-                console.log("Promo Code object not found in settings."); {% endcomment %}
-
             
+            <script>
+              let promos = [];
+
+                    {% for i in (1..20) %}
+                      {% assign code1 = 'promoCode_' | append: i %}
+                      {% assign product1 = 'product_' | append: i %}
+                      {% assign threshold1 = 'promoThresholdAmount_' | append: i %}
+
+                      {% unless settings[code1] or settings[product1] or settings[threshold1] == '' %}
+                        let obj_{{ i }} = {
+                            promo: '{{ settings[code1] }}',
+                            product: '{{ settings[product1].selected_or_first_available_variant.id }}',
+                            thresholdAmount: {{ settings[threshold1] }},
+                        };
+
+                        promos.push(obj_{{ i }});
+                      {% endunless %}
+                      
+                    {% endfor %}
+
+                    console.log(promos);            
             </script>
       </div>
     </div>
