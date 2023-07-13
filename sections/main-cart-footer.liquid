@@ -16,36 +16,35 @@
               placeholder="Enter discount code"
               value="{{ discountCode }}"
             >
+              
             <button type="submit" class="button input-group__btn" id="apply-discount-button">Apply</button>
-
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          var discountForm = document.querySelector('form[action="/cart"]');
-          var discountInput = document.querySelector('input[name="discount_code"]');
-          
-          discountForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            var discountCode = discountInput.value;
-            applyDiscount(discountCode);
-          });
-        
-          function applyDiscount(discountCode) {
-            ShopifyAPI.applyDiscountCode(discountCode, function(cart) {
-              // Check if the discount code is valid
-              if (cart.discount_code === discountCode) {
-                // Discount code applied successfully
-                console.log("Discount applied successfully!");// Refresh the page to reflect the updated cart
-              } else {
-                // Invalid discount code
-                console.log("Invalid discount code.");
+            
+            <script>
+              const totalCartPrice = ({{ cart.total_price }} / 100);
+              console.log(totalCartPrice);
+              if(totalCartPrice < 300){
+                console.log('not eligable for free product');
+               
               }
-            });
-          }
-        });
-      </script>
+              let arr12 = [{{ settings["defination"] }}];
+              console.log(arr12);
+              
+              
+              {% comment %} let promoCodeRegex = /"name"\s*:\s*"Promo Code"[^}]+}/;
+              let promoCodeMatch = settings.match(promoCodeRegex);
+
+              if (promoCodeMatch) {
+                let promoCode = JSON.parse(promoCodeMatch[0]);
+                console.log(promoCode);
+              } else {
+                console.log("Promo Code object not found in settings."); {% endcomment %}
+
+            
+            </script>
       </div>
     </div>
   <div>
+    <h1>.XDD </h1>
     <div class="cart__footer">
       {%- if settings.show_cart_note -%}
         <cart-note class="cart__note field">
@@ -157,7 +156,6 @@
   });
   
 </script>
-
 
 {% schema %}
 {
