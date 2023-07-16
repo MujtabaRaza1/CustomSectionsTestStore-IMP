@@ -15,45 +15,87 @@
               class="input-group__field"
               placeholder="Enter discount code"
               value="{{ discountCode }}"
-            >
-
-             
-              <script>
-
-
-
-              </script>
-              {{ settings.settings['promoCode_1'] }}
-              
+            >              
             <button type="submit" class="button input-group__btn" id="apply-discount-button">Apply</button>
             
             
             <script>
               let promos = [];
+              {% assign skipObject = false %}
 
-                    {% for i in (1..20) %}
+                    {% for i in (0..20) %}
                       {% assign code1 = 'promoCode_' | append: i %}
                       {% assign product1 = 'product_' | append: i %}
                       {% assign threshold1 = 'promoThresholdAmount_' | append: i %}
 
-                      {% unless settings[code1] or settings[product1] or settings[threshold1] == '' %}
+                      {% assign promoCodeValue = settings[code1] %}
+                      {% assign productValue = settings[product1].selected_or_first_available_variant.id %}
+                      {% assign thresholdValue = settings[threshold1] %}
+                     
+                      {% if promoCodeValue != blank and productValue != blank and thresholdValue != blank %}
                         let obj_{{ i }} = {
                             promo: '{{ settings[code1] }}',
                             product: '{{ settings[product1].selected_or_first_available_variant.id }}',
-                            thresholdAmount: {{ settings[threshold1] }},
+                            thresholdAmount: '{{ settings[threshold1] }}'
                         };
-
+                 
                         promos.push(obj_{{ i }});
-                      {% endunless %}
-                      
+                      {% else %}
+                        {% assign skipObject = true %}
+                      {% endif %}
+                    
+                      {% if skipObject == true %}
+                        {% assign skipObject = false %}
+                      {% endif %}
                     {% endfor %}
 
-                    console.log(promos);            
+                    console.log(promos);   
+                    const addToCart = async (variantId) => {
+                      const formData = new FormData();
+                      formData.append('id', variantId);
+                      formData.append('quantity', '1');
+                    
+                      
+                       await fetch('/cart/add.js', {
+                        method: 'POST',
+                        body: formData
+                      })
+                        .then(response => response.json())
+                        .then(data => {
+                          // Handle the response data as needed
+                          console.log('Product added to cart:', data);
+                          window.location.reload();
+                        })
+                        .catch(error => {
+                          // Handle any errors that occurred during the request
+                          console.error('Error adding product to cart:', error);
+                        });
+                  
+                      }
+                    function checkThreshold() {
+                      const inputCode = document.querySelector('#CartDrawer-DiscountCode').value;
+                      const matchedPromo = promos.find(obj => obj.promo === inputCode);
+
+                      if(matchedPromo){
+                        const { product, thresholdAmount } = matchedPromo;
+                        const cartPrice = {{ cart.total_price | money_without_currency }}
+                        if(thresholdAmount <= cartPrice){
+                          const variantId = product;
+                          addToCart(variantId);
+                          
+                          }
+                        }else{
+                          console.log('Invalid Promo Code')
+                        }
+                      } 
+                    
+
+                    const applyBtn = document.querySelector('#apply-discount-button');
+                    applyBtn.addEventListener('click', checkThreshold);
             </script>
       </div>
     </div>
   <div>
-    <h1>.XDD </h1>
     <div class="cart__footer">
       {%- if settings.show_cart_note -%}
         <cart-note class="cart__note field">

@@ -167,6 +167,9 @@ cart-items {
     text-transform: var(--x-text-field-text-transform,var(--x-global-typography-letter-case));
     outline: none;
   }
+  .input-group__btn{
+    height: 1.5rem;
+  }
   .label1{
     margin-right: 19rem;
   }
