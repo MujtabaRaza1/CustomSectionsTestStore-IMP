@@ -20,6 +20,28 @@
             
             
             <script>
+              const addToCart = async (variantId) => {
+                const formData = new FormData();
+                formData.append('id', variantId);
+                formData.append('quantity', '1');
+              
+                
+                 await fetch('/cart/add.js', {
+                  method: 'POST',
+                  body: formData
+                })
+                  .then(response => response.json())
+                  .then(data => {
+                    // Handle the response data as needed
+                    console.log('Product added to cart:', data);
+                    window.location.reload();
+                  })
+                  .catch(error => {
+                    // Handle any errors that occurred during the request
+                    console.error('Error adding product to cart:', error);
+                  });
+            
+                }
               let promos = [];
               {% assign skipObject = false %}
 
@@ -50,28 +72,7 @@
                     {% endfor %}
 
                     console.log(promos);   
-                    const addToCart = async (variantId) => {
-                      const formData = new FormData();
-                      formData.append('id', variantId);
-                      formData.append('quantity', '1');
                     
-                      
-                       await fetch('/cart/add.js', {
-                        method: 'POST',
-                        body: formData
-                      })
-                        .then(response => response.json())
-                        .then(data => {
-                          // Handle the response data as needed
-                          console.log('Product added to cart:', data);
-                          window.location.reload();
-                        })
-                        .catch(error => {
-                          // Handle any errors that occurred during the request
-                          console.error('Error adding product to cart:', error);
-                        });
-                  
-                      }
                     function checkThreshold() {
                       const inputCode = document.querySelector('#CartDrawer-DiscountCode').value;
                       const matchedPromo = promos.find(obj => obj.promo === inputCode);

@@ -270,6 +270,9 @@
 
                         <td class="cart-item__quantity" role="cell" headers="CartDrawer-ColumnQuantity">
                           <div class="cart-item__quantity-wrapper">
+                            {% if product.type == 'gift' %}
+                              
+                              {% unless product.tags contains 'free_gift' %}
                             <quantity-input class="quantity cart-quantity">
                               <button class="quantity__button no-js-hidden" name="minus" type="button">
                                 <span class="visually-hidden">
@@ -302,6 +305,8 @@
                                 {% render 'icon-plus' %}
                               </button>
                             </quantity-input>
+                            {% endunless %}
+                          {% endif %}
 
                             <cart-remove-button
                               id="CartDrawer-Remove-{{ item.index | plus: 1 }}"

@@ -216,12 +216,29 @@
                       {%- endif -%}
                     </div>
                   </td>
-
+                  <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                      var productType = '{{ settings.product.type }}';
+                      var hideQuantityProductTypes = ['gift', 'your_other_product_type'];
+                  
+                      if (hideQuantityProductTypes.includes(productType)) {
+                        var quantitySelectors = document.querySelectorAll('input[name="quantity"]');
+                        quantitySelectors.forEach(function(selector) {
+                          selector.style.display = 'none';
+                        });
+                      }
+                      console.log('xDDD', {{ product.product_type }});
+                    });
+                  </script>
                   <td class="cart-item__quantity">
                     <div class="cart-item__quantity-wrapper">
                       <label class="visually-hidden" for="Quantity-{{ item.index | plus: 1 }}">
                         {{ 'products.product.quantity.label' | t }}
                       </label>
+                      {% if product.tags contains 'free_gift' %}
+                        <br>
+                        {% else %}
+                      
                       <quantity-input class="quantity cart-quantity">
                         <button class="quantity__button no-js-hidden" name="minus" type="button">
                           <span class="visually-hidden">
@@ -254,6 +271,7 @@
                           {% render 'icon-plus' %}
                         </button>
                       </quantity-input>
+                    {% endif %}
 
                       <cart-remove-button
                         id="Remove-{{ item.index | plus: 1 }}"
