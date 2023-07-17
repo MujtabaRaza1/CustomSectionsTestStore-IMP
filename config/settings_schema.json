@@ -49,7 +49,7 @@
       {
         "id": "product_1",
         "label": "Free Sample Collection",
-        "type": "product"
+        "type": "collection"
       },
       {
         "type": "text",
