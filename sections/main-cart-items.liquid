@@ -235,9 +235,7 @@
                       <label class="visually-hidden" for="Quantity-{{ item.index | plus: 1 }}">
                         {{ 'products.product.quantity.label' | t }}
                       </label>
-                      {% if product.tags contains 'free_gift' %}
-                        <br>
-                        {% else %}
+                      {% unless product.tags contains 'free_gift' %}
                       
                       <quantity-input class="quantity cart-quantity">
                         <button class="quantity__button no-js-hidden" name="minus" type="button">
@@ -271,7 +269,7 @@
                           {% render 'icon-plus' %}
                         </button>
                       </quantity-input>
-                    {% endif %}
+                    {% endunless %}
 
                       <cart-remove-button
                         id="Remove-{{ item.index | plus: 1 }}"
