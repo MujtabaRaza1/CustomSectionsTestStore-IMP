@@ -266,6 +266,7 @@
                           </button>
                         </quantity-input>
                       {% else %}
+                      
                       <quantity-input class="quantity cart-quantity">
                         <button class="quantity__button no-js-hidden" id="triggerButton1" name="minus" type="button">
                           <span class="visually-hidden">
@@ -299,7 +300,7 @@
                         </button>
                       </quantity-input>
                     {% endif %}
-              
+
                       <cart-remove-button
                         id="Remove-{{ item.index | plus: 1 }}"
                         data-index="{{ item.index | plus: 1 }}"
