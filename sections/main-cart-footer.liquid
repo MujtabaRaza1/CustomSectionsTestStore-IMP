@@ -3,6 +3,44 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 
+
+<script>
+  const checkCart = async() => {
+    const cartResponse = await fetch('/cart.js');
+    const cartData1 = await cartResponse.json();
+    {% comment %} console.log(cartData1); {% endcomment %}
+    for(const item of cartData1.items){
+      const removeProduct = item.variant_id;
+      const arrVariantCheck = promos.find(obj => obj.product == removeProduct);
+      const cartPrice = {{ cart.total_price | money_without_currency }}
+      const formData = new FormData();
+      if(arrVariantCheck){
+        const {product, thresholdAmount} = arrVariantCheck;
+          if(cartPrice < thresholdAmount){
+            formData.append('id', removeProduct);
+            formData.append('quantity', '0');
+            {% comment %} console.log(formData); {% endcomment %}
+        
+          {% comment %} console.log(product); {% endcomment %}
+          if(item.price === 0){
+            {% comment %} console.log(thresholdAmount); {% endcomment %}
+            await fetch('/cart/change.js', {
+              method: 'POST',
+              body: formData
+            });
+            window.location.reload();
+            {% comment %} window.location.reload(); {% endcomment %}
+          }
+
+        }
+      }
+      
+    }
+    checkCart();
+  }
+
+  checkCart();
+</script>
 <div class="page-width{% if cart == empty %} is-empty{% endif %}" id="main-cart-footer" data-id="{{ section.id }}">
   <div class="drawer__discount-code section">
       <label for="CartDrawer-DiscountCode" class="label1">Discount Code</label>
@@ -17,31 +55,71 @@
               value="{{ discountCode }}"
             >              
             <button type="submit" class="button input-group__btn" id="apply-discount-button">Apply</button>
-            
-            
+
             <script>
               const addToCart = async (variantId) => {
                 const formData = new FormData();
                 formData.append('id', variantId);
                 formData.append('quantity', '1');
-              
-                
-                 await fetch('/cart/add.js', {
-                  method: 'POST',
-                  body: formData
-                })
-                  .then(response => response.json())
-                  .then(data => {
-                    // Handle the response data as needed
-                    console.log('Product added to cart:', data);
-                    window.location.reload();
-                  })
-                  .catch(error => {
-                    // Handle any errors that occurred during the request
-                    console.error('Error adding product to cart:', error);
-                  });
             
+                try {
+                  // Fetch the current cart items
+                  const cartResponse = await fetch('/cart.js');
+                  const cartData = await cartResponse.json();
+            
+                  // Check if the variant is already in the cart
+                  let isVariantInCart = false;
+                    for (const item of cartData.items) {
+                      {% comment %} console.log(item.variant_id); {% endcomment %}
+                      {% comment %} console.log(variantId); {% endcomment %}
+                      if(item.price == 0){
+                        console.log(item.price);
+                        console.log(item.variant_id);
+                        const formData1 = new FromData();
+                        const variantIdRemove = item.variant_id;
+                        formData1.append('id', variantIdRemove);
+                        formData1.append('quantity', '0');
+
+
+
+                        const removeFromCartCartResponse = await fetch('/cart/add.js', {
+                        method: 'POST',
+                        body: formData1
+                        });
+                        const data = await removeFromCartResponse.json();
+
+
+                        {% comment %} console.log('Product added to cart:', data); {% endcomment %}
+                        {% comment %} window.location.reload(); {% endcomment %}
+                        {% comment %} console.log('item already in cart', item.price);
+                        isVariantInCart = ture; {% endcomment %}
+                      }
+                      
+                      {% comment %} if (item.variant_id === variantId) {
+                        isVariantInCart = true;
+                        break;
+                      } {% endcomment %}
+                    }
+            
+                  if (isVariantInCart) {
+                    console.log('Product is already in the cart.');
+                    // You can choose to show a message to the user if needed.
+                    return;
+                  }
+            
+                  // If the variant is not in the cart, add the product
+                  const addToCartResponse = await fetch('/cart/add.js', {
+                    method: 'POST',
+                    body: formData
+                  });
+                  const data = await addToCartResponse.json();
+                  {% comment %} console.log('Product added to cart:', data); {% endcomment %}
+                  window.location.reload();
+                } catch (error) {
+                  // Handle any errors that occurred during the request
+                  console.log('Error adding product to cart:', error);
                 }
+              }
               let promos = [];
               {% assign skipObject = false %}
 
@@ -88,9 +166,9 @@
                         }else{
                           console.log('Invalid Promo Code')
                         }
-                      } 
+                      }
+                      
                     
-
                     const applyBtn = document.querySelector('#apply-discount-button');
                     applyBtn.addEventListener('click', checkThreshold);
             </script>
@@ -121,6 +199,11 @@
                 <div class="totals">
                   <h2 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h2>
                   <p class="totals__subtotal-value">{{ cart.total_price | money_with_currency }}</p>
+                  <script>
+                    let subTotPrice = document.querySelector(".totals__subtotal-value").value;
+                    console.log(subTotPrice);
+                  </script>
+              
                 </div>
 
                 <div>

@@ -5,6 +5,16 @@
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
 
+<script>
+  var triggerBtn1 = document.querySelectorAll('#triggerButton1');
+  var triggerBtn2 = document.querySelectorAll('#triggerButton2');
+  var triggerInput1 = document.querySelectorAll('.triggerInput1');
+  var triggerDelete = document.querySelectorAll('.triggerDelete');
+
+  [triggerBtn1, triggerBtn2, triggerInput1 , triggerDelete].forEach(function(element){
+    element.addEventListener('click', checkCart);
+  });
+</script>
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -216,38 +226,55 @@
                       {%- endif -%}
                     </div>
                   </td>
-                  <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                      var productType = '{{ settings.product.type }}';
-                      var hideQuantityProductTypes = ['gift', 'your_other_product_type'];
-                  
-                      if (hideQuantityProductTypes.includes(productType)) {
-                        var quantitySelectors = document.querySelectorAll('input[name="quantity"]');
-                        quantitySelectors.forEach(function(selector) {
-                          selector.style.display = 'none';
-                        });
-                      }
-                      console.log('xDDD', {{ product.product_type }});
-                    });
-                  </script>
                   <td class="cart-item__quantity">
                     <div class="cart-item__quantity-wrapper">
                       <label class="visually-hidden" for="Quantity-{{ item.index | plus: 1 }}">
                         {{ 'products.product.quantity.label' | t }}
                       </label>
-                      {% if product.tags contains 'free_gift' %}
-                        <br>
-                        {% else %}
-                      
+                      {% if  item.product.type  contains 'gift' %}
+                        <quantity-input class="quantity cart-quantity">
+                          <button class="quantity__button no-js-hidden" disabled name="minus" type="button">
+                            <span class="visually-hidden">
+                              {{- 'products.product.quantity.decrease' | t: product: item.product.title | escape -}}
+                            </span>
+                            {% render 'icon-minus' %}
+                          </button>
+                          <input
+                            class="quantity__input"
+                            data-quantity-variant-id="{{ item.variant.id }}"
+                            type="number"
+                            name="updates[]"
+                            disabled
+                            value="{{ item.quantity }}"
+                            {% # theme-check-disable %}
+                            data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
+                            min="{{ item.variant.quantity_rule.min }}"
+                            {% if item.variant.quantity_rule.max != null %}
+                              max="{{ item.variant.quantity_rule.max }}"
+                            {% endif %}
+                            step="{{ item.variant.quantity_rule.increment }}"
+                            {% # theme-check-enable %}
+                            aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
+                            id="Quantity-{{ item.index | plus: 1 }}"
+                            data-index="{{ item.index | plus: 1 }}"
+                          >
+                          <button class="quantity__button no-js-hidden" disabled name="plus" type="button">
+                            <span class="visually-hidden">
+                              {{- 'products.product.quantity.increase' | t: product: item.product.title | escape -}}
+                            </span>
+                            {% render 'icon-plus' %}
+                          </button>
+                        </quantity-input>
+                      {% else %}
                       <quantity-input class="quantity cart-quantity">
-                        <button class="quantity__button no-js-hidden" name="minus" type="button">
+                        <button class="quantity__button no-js-hidden" id="triggerButton1" name="minus" type="button">
                           <span class="visually-hidden">
                             {{- 'products.product.quantity.decrease' | t: product: item.product.title | escape -}}
                           </span>
                           {% render 'icon-minus' %}
                         </button>
                         <input
-                          class="quantity__input"
+                          class="quantity__input triggerInput"
                           data-quantity-variant-id="{{ item.variant.id }}"
                           type="number"
                           name="updates[]"
@@ -264,7 +291,7 @@
                           id="Quantity-{{ item.index | plus: 1 }}"
                           data-index="{{ item.index | plus: 1 }}"
                         >
-                        <button class="quantity__button no-js-hidden" name="plus" type="button">
+                        <button class="quantity__button no-js-hidden" id="triggerButton2" name="plus" type="button">
                           <span class="visually-hidden">
                             {{- 'products.product.quantity.increase' | t: product: item.product.title | escape -}}
                           </span>
@@ -272,10 +299,11 @@
                         </button>
                       </quantity-input>
                     {% endif %}
-
+              
                       <cart-remove-button
                         id="Remove-{{ item.index | plus: 1 }}"
                         data-index="{{ item.index | plus: 1 }}"
+                        class=" triggerDelete"
                       >
                         <a
                           href="{{ item.url_to_remove }}"
@@ -285,6 +313,8 @@
                           {% render 'icon-remove' %}
                         </a>
                       </cart-remove-button>
+
+                      
                     </div>
                     <div class="cart-item__error" id="Line-item-error-{{ item.index | plus: 1 }}" role="alert">
                       <small class="cart-item__error-text"></small>
