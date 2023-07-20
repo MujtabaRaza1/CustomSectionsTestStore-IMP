@@ -263,6 +263,199 @@
     </script>
   </head>
 
+
+  {% comment %} <script>
+    const checkCart = async() => {
+      const cartResponse = await fetch('/cart.js');
+      const cartData1 = await cartResponse.json();
+      {% comment %} console.log(cartData1); {% endcomment %}
+      for(const item of cartData1.items){
+        const removeProduct = item.variant_id;
+        const arrVariantCheck = promos.find(obj => obj.product == removeProduct);
+        const cartPrice = {{ cart.total_price | money_without_currency }}
+        const formData = new FormData();
+        if(arrVariantCheck){
+          const {product, thresholdAmount} = arrVariantCheck;
+            if(cartPrice < thresholdAmount){
+              formData.append('id', removeProduct);
+              formData.append('quantity', '0');
+              {% comment %} console.log(formData); {% endcomment %}
+          
+            {% comment %} console.log(product); {% endcomment %}
+            if(item.price === 0){
+              {% comment %} console.log(thresholdAmount); {% endcomment %}
+              await fetch('/cart/change.js', {
+                method: 'POST',
+                body: formData
+              });
+              window.location.reload();
+              {% comment %} window.location.reload(); {% endcomment %}
+            }
+  
+          }
+        }
+        
+      }
+    }
+
+    function enableCheckCart(){
+      checkCart();
+      console.log('xDD');
+    }
+  </script>
+
+
+
+  <script>
+    const addToCart = async (variantId) => {
+      const formData = new FormData();
+      formData.append('id', variantId);
+      formData.append('quantity', '1');
+  
+      try {
+        // Fetch the current cart items
+        const cartResponse = await fetch('/cart.js');
+        const cartData = await cartResponse.json();
+  
+        // Check if the variant is already in the cart
+        let isVariantInCart = false;
+          for (const item of cartData.items) {
+            {% comment %} console.log(item.variant_id); {% endcomment %}
+            {% comment %} console.log(variantId); {% endcomment %}
+            if(item.price == 0){
+              console.log(item.price);
+              console.log(item.variant_id);
+              const formData1 = new FromData();
+              const variantIdRemove = item.variant_id;
+              formData1.append('id', variantIdRemove);
+              formData1.append('quantity', '0');
+
+
+
+              const removeFromCartCartResponse = await fetch('/cart/add.js', {
+              method: 'POST',
+              body: formData1
+              });
+              const data = await removeFromCartResponse.json();
+
+
+              {% comment %} console.log('Product added to cart:', data); {% endcomment %}
+              {% comment %} window.location.reload(); {% endcomment %}
+              {% comment %} console.log('item already in cart', item.price);
+              isVariantInCart = ture; {% endcomment %}
+            }
+            
+            {% comment %} if (item.variant_id === variantId) {
+              isVariantInCart = true;
+              break;
+            } {% endcomment %}
+          }
+  
+        if (isVariantInCart) {
+          console.log('Product is already in the cart.');
+          // You can choose to show a message to the user if needed.
+          return;
+        }
+  
+        // If the variant is not in the cart, add the product
+        const addToCartResponse = await fetch('/cart/add.js', {
+          method: 'POST',
+          body: formData
+        });
+        const data = await addToCartResponse.json();
+        {% comment %} console.log('Product added to cart:', data); {% endcomment %}
+        window.location.reload();
+      } catch (error) {
+        // Handle any errors that occurred during the request
+        console.log('Error adding product to cart:', error);
+      }
+    }
+    let promos = [];
+    {% assign skipObject = false %}
+
+          {% for i in (0..20) %}
+            {% assign code1 = 'promoCode_' | append: i %}
+            {% assign product1 = 'product_' | append: i %}
+            {% assign threshold1 = 'promoThresholdAmount_' | append: i %}
+
+            {% assign promoCodeValue = settings[code1] %}
+            {% assign productValue = settings[product1].selected_or_first_available_variant.id %}
+            {% assign thresholdValue = settings[threshold1] %}
+           
+            {% if promoCodeValue != blank and productValue != blank and thresholdValue != blank %}
+              let obj_{{ i }} = {
+                  promo: '{{ settings[code1] }}',
+                  product: '{{ settings[product1].selected_or_first_available_variant.id }}',
+                  thresholdAmount: '{{ settings[threshold1] }}'
+              };
+       
+              promos.push(obj_{{ i }});
+            {% else %}
+              {% assign skipObject = true %}
+            {% endif %}
+          
+            {% if skipObject == true %}
+              {% assign skipObject = false %}
+            {% endif %}
+          {% endfor %}
+
+          console.log(promos);   
+          
+          function checkThreshold() {
+            const inputCode = document.querySelector('#CartDrawer-DiscountCode').value;
+            const matchedPromo = promos.find(obj => obj.promo === inputCode);
+
+            if(matchedPromo){
+              const { product, thresholdAmount } = matchedPromo;
+              const cartPrice = {{ cart.total_price | money_without_currency }}
+              if(thresholdAmount <= cartPrice){
+                const variantId = product;
+                addToCart(variantId);
+                
+                }
+              }else{
+                console.log('Invalid Promo Code')
+              }
+            }
+            
+          
+
+  </script> {% endcomment %}
+
+
+<script>
+  let promos = [];
+  {% assign skipObject = false %}
+
+        {% for i in (0..20) %}
+          {% assign code1 = 'promoCode_' | append: i %}
+          {% assign product1 = 'product_' | append: i %}
+          {% assign threshold1 = 'promoThresholdAmount_' | append: i %}
+
+          {% assign promoCodeValue = settings[code1] %}
+          {% assign productValue = settings[product1].selected_or_first_available_variant.id %}
+          {% assign thresholdValue = settings[threshold1] %}
+         
+          {% if promoCodeValue != blank and productValue != blank and thresholdValue != blank %}
+            let obj_{{ i }} = {
+                promo: '{{ settings[code1] }}',
+                product: '{{ settings[product1].selected_or_first_available_variant.id }}',
+                thresholdAmount: '{{ settings[threshold1] }}'
+            };
+     
+            promos.push(obj_{{ i }});
+          {% else %}
+            {% assign skipObject = true %}
+          {% endif %}
+        
+          {% if skipObject == true %}
+            {% assign skipObject = false %}
+          {% endif %}
+        {% endfor %}
+
+</script>
+
+
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}

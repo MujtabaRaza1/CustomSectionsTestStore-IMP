@@ -5,16 +5,7 @@
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
 
-<script>
-  var triggerBtn1 = document.querySelectorAll('#triggerButton1');
-  var triggerBtn2 = document.querySelectorAll('#triggerButton2');
-  var triggerInput1 = document.querySelectorAll('.triggerInput1');
-  var triggerDelete = document.querySelectorAll('.triggerDelete');
 
-  [triggerBtn1, triggerBtn2, triggerInput1 , triggerDelete].forEach(function(element){
-    element.addEventListener('click', checkCart);
-  });
-</script>
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -314,8 +305,6 @@
                           {% render 'icon-remove' %}
                         </a>
                       </cart-remove-button>
-
-                      
                     </div>
                     <div class="cart-item__error" id="Line-item-error-{{ item.index | plus: 1 }}" role="alert">
                       <small class="cart-item__error-text"></small>
@@ -403,6 +392,20 @@
   </form>
   
 </cart-items>
+
+ {% comment %} <script>
+  enableCheckCart();
+  const triggerBtn1 = document.querySelector('#triggerButton1');
+  const triggerBtn2 = document.querySelector('#triggerButton2');
+  const triggerInput1 = document.querySelector('.triggerInput1');
+  const triggerDelete = document.querySelector('.triggerDelete');
+
+  triggerBtn1.addEventListener('click', enableCheckCart);
+  triggerBtn2.addEventListener('click', enableCheckCart);
+  triggerDelete.addEventListener('click', enableCheckCart);
+
+
+</script>  {% endcomment %}
 
 {% schema %}
 {

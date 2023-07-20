@@ -1,22 +1,40 @@
 if (!customElements.get('product-form')) {
   function addFreeToCart() {
-    const variantId = 45208262639900;
-  
+    const variantId = 45813089567004;
     const formData = new FormData();
     formData.append('id', variantId);
   
-    fetch('/cart/add.js', {
-      method: 'POST',
-      body: formData
-    })
+    // Fetch the cart to check if the product with variantId already exists
+    fetch('/cart.js')
       .then(response => response.json())
-      .then(data => {
-        // Handle the response data as needed
-        console.log('Product added to cart:', data);
+      .then(cartData => {
+        const cartItems = cartData.items;
+        
+        // Check if the product with variantId already exists in the cart
+        const productExists = cartItems.some(item => item.variant_id === variantId);
+        
+        if (productExists) {
+          console.log('Product with variant ID', variantId, 'already exists in the cart.');
+        } else {
+          // Product doesn't exist in the cart, add it
+          fetch('/cart/add.js', {
+            method: 'POST',
+            body: formData
+          })
+            .then(response => response.json())
+            .then(data => {
+              // Handle the response data as needed
+              console.log('Product added to cart:', data);
+            })
+            .catch(error => {
+              // Handle any errors that occurred during the request
+              console.error('Error adding product to cart:', error);
+            });
+        }
       })
       .catch(error => {
-        // Handle any errors that occurred during the request
-        console.error('Error adding product to cart:', error);
+        // Handle any errors that occurred while fetching the cart
+        console.error('Error fetching cart:', error);
       });
   }
  

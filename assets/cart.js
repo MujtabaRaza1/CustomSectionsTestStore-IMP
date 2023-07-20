@@ -13,6 +13,56 @@ class CartRemoveButton extends HTMLElement {
 
 customElements.define('cart-remove-button', CartRemoveButton);
 
+function removeTwoZeros(number) {
+  // Convert the number to a string
+  let numberString = number.toString();
+
+  // Check if the number has at least two zeros at the end
+  if (numberString.length >= 2) {
+    // Remove the last two characters (zeros)
+    numberString = numberString.slice(0, -2);
+  } else {
+    // If there are less than two characters, set the number to zero
+    numberString = '0';
+  }
+
+  // Convert the updated string back to a number and return it
+  return Number(numberString);
+}
+
+const checkCart = async(cartPrice) => {
+  let cartPrice1=removeTwoZeros(cartPrice);
+  console.log(cartPrice1,'w')
+  const cartResponse = await fetch('/cart.js');
+  const cartData1 = await cartResponse.json();
+console.log(cartData1,'dsss'); 
+  for(const item of cartData1.items){
+    const arrVariantCheck = promos.find(obj => obj.product == item.variant_id);
+     console.log(arrVariantCheck,'checking3')
+    if(arrVariantCheck){
+      const {product, thresholdAmount} = arrVariantCheck;
+        if(cartPrice1 < thresholdAmount){
+          const formData = new FormData();
+          formData.append('id', product);
+          formData.append('quantity', '0');
+ 
+        if(item.price === 0){
+      
+          await fetch('/cart/change.js', {
+            method: 'POST',
+            body: formData
+          });
+          window.location.reload();
+   
+        }
+
+      }
+    }
+    
+  }
+}
+
+
 class CartItems extends HTMLElement {
   constructor() {
     super();
@@ -47,6 +97,8 @@ class CartItems extends HTMLElement {
     this.updateQuantity(event.target.dataset.index, event.target.value, document.activeElement.getAttribute('name'));
     console.log(this.updateQuantity);
   }
+
+  
 
   onCartUpdate() {
     fetch(`${routes.cart_url}?section_id=main-cart-items`)
@@ -86,9 +138,13 @@ class CartItems extends HTMLElement {
     ];
   }
 
+
+
+
   updateQuantity(line, quantity, name) {
     this.enableLoading(line);
-
+    console.log(promos,'ads')
+   
     const body = JSON.stringify({
       line,
       quantity,
@@ -102,6 +158,8 @@ class CartItems extends HTMLElement {
       })
       .then((state) => {
         const parsedState = JSON.parse(state);
+        console.log(parsedState,'checked');
+        checkCart(parsedState.total_price);
         const quantityElement =
           document.getElementById(`Quantity-${line}`) || document.getElementById(`Drawer-quantity-${line}`);
         const items = document.querySelectorAll('.cart-item');
@@ -159,6 +217,8 @@ class CartItems extends HTMLElement {
       .finally(() => {
         this.disableLoading(line);
       });
+
+     
   }
 
   updateLiveRegions(line, message) {

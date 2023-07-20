@@ -225,7 +225,6 @@
                     <span>({{- 'products.product.quantity.in_cart_html' | t: quantity: cart_qty -}})</span>
                   </span>
                 </label>
-                {% unless product.tags contains 'free_gift' %}
                 <quantity-input class="quantity">
                   <button class="quantity__button no-js-hidden" name="minus" type="button">
                     <span class="visually-hidden">
@@ -256,7 +255,6 @@
                     {% render 'icon-plus' %}
                   </button>
                 </quantity-input>
-                {% endunless %}
                 <div class="quantity__rules caption no-js-hidden">
                   {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
                     <span class="divider">

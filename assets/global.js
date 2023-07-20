@@ -910,8 +910,9 @@ class VariantSelects extends HTMLElement {
   filterImageVariant(){
     if (this.currentVariant.featured_image && this.currentVariant.featured_image.alt) {
       // only the variants for the selected color
-      const currentImgAlt = this.currentVariant.featured_image.alt;
-      const thumbnailSelector = `[thumbnail-alt = '${currentImgAlt}']`;
+      document.querySelectorAll('[thumbnail-alt]').forEach(img => img.style.display = 'none');
+      const currentImgAlt = this.currentVariant.featured_image.alt
+      const thumbnailSelector = `[thumbnail-alt = '${currentImgAlt}']`
       document.querySelectorAll(thumbnailSelector).forEach(img => img.style.display = 'block');
     }
     else{
@@ -1091,6 +1092,7 @@ class VariantSelects extends HTMLElement {
 
   toggleAddButton(disable = true, text, modifyClass = true) {
     const productForm = document.getElementById(`product-form-${this.dataset.section}`);
+    this.filterImageVariant();
     if (!productForm) return;
     const addButton = productForm.querySelector('[name="add"]');
     const addButtonText = productForm.querySelector('[name="add"] > span');
@@ -1125,6 +1127,7 @@ class VariantSelects extends HTMLElement {
   getVariantData() {
     this.variantData = this.variantData || JSON.parse(this.querySelector('[type="application/json"]').textContent);
     return this.variantData;
+    
   }
 }
 
@@ -1169,6 +1172,7 @@ class ProductRecommendations extends HTMLElement {
   }
 
   connectedCallback() {
+    this.filterImageVariant();
     const handleIntersection = (entries, observer) => {
       if (!entries[0].isIntersecting) return;
       observer.unobserve(this);
