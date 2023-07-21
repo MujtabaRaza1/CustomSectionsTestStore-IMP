@@ -174,7 +174,22 @@
       console.log('Error adding product to cart:', error);
     }
   }
-
+        function removeTwoZeros(number) {
+          // Convert the number to a string
+          let numberString = number.toString();
+        
+          // Check if the number has at least two zeros at the end
+          if (numberString.length >= 2) {
+            // Remove the last two characters (zeros)
+            numberString = numberString.slice(0, -2);
+          } else {
+            // If there are less than two characters, set the number to zero
+            numberString = '0';
+          }
+        
+          // Convert the updated string back to a number and return it
+          return Number(numberString);
+        }
         const checkThreshold = async() => {
           const cartResponse = await fetch('/cart.js');
           const cartData = await cartResponse.json();
@@ -183,8 +198,8 @@
           const matchedPromo = promos.find(obj => obj.promo === inputCode);
           if(matchedPromo){
             const { product, thresholdAmount } = matchedPromo;
-            const cartPrice = cartData.total_price;
-            
+            const cartPrice = removeTwoZeros(cartData.total_price);
+            console.log(cartPrice);
               const variantId = product;
               alreadyInCart = false;
               for (const item of cartData.items){
