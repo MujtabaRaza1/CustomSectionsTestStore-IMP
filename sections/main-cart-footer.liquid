@@ -199,7 +199,6 @@
           if(matchedPromo){
             const { product, thresholdAmount } = matchedPromo;
             const cartPrice = removeTwoZeros(cartData.total_price);
-            console.log(cartPrice);
               const variantId = product;
               alreadyInCart = false;
               for (const item of cartData.items){
